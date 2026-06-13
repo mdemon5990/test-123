@@ -1,4 +1,5 @@
-python-telegram-bot>=20.0
+python-telegram-bot>=21.0
+httpx>=0.27.0
 aiohttp
 nest_asyncio
 pytz
