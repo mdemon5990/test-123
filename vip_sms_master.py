@@ -42,7 +42,7 @@ logging.basicConfig(
 logger = logging.getLogger("VIP_SMS_Master")
 
 # আপনার মাস্টার বটের টোকেন এবং এডমিন আইডি
-MASTER_BOT_TOKEN = "8738486312:AAFQMXSJPDL3i93vr59WtEchs1k9xoov-4s"
+MASTER_BOT_TOKEN = "8820442516:AAGF73UUIMnRnP8y8kbxRsPTLdevncc3pSA"
 MAIN_ADMIN = "7034779471"
 GLOBAL_LOG_CHANNEL = "@ffxemon"
 TIMEZONE = pytz.timezone("Asia/Dhaka")
