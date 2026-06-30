@@ -1,6 +1,1 @@
-python-telegram-bot>=21.0
-httpx>=0.27.0
-aiohttp
-nest_asyncio
-pytz
-flask
+python-telegram-bot>=21.0httpx>=0.27.0aiohttpnest-asynciopytz
