@@ -35,6 +35,7 @@ from telegram.ext import (
 from telegram.constants import ParseMode
 from telegram.error import InvalidToken, TelegramError, RetryAfter
 from telegram.request import HTTPXRequest
+from aiohttp import web
 
 nest_asyncio.apply()
 
@@ -1902,6 +1903,22 @@ async def boot_clone_instance(token):
     except Exception as e:
         return False, f"স্টার্টআপ এরর: {e}"
 
+async def handle_ping(request):
+    return web.Response(text="Master Bot is Alive and Running!")
+
+async def start_web_server():
+    try:
+        app = web.Application()
+        app.router.add_get('/', handle_ping)
+        runner = web.AppRunner(app)
+        await runner.setup()
+        port = int(os.environ.get("PORT", 10000))
+        site = web.TCPSite(runner, '0.0.0.0', port)
+        await site.start()
+        logger.info(f"✅ Dummy Web Server started on port {port} (Required for Render Free Tier)")
+    except Exception as e:
+        logger.error(f"Web server start failed: {e}")
+
 async def start_master_engine():
     logger.info("Initializing Master Clone SMS Engine with Firebase DB...")
     
@@ -1933,6 +1950,9 @@ async def start_master_engine():
             logger.info(f"Cloned Bot @{res_msg} successfully restarted.")
         else:
             logger.error(f"Cloned Bot startup failed for token: {token[:10]}... Error: {res_msg}")
+
+    # Render এর জন্য Dummy Web Server চালু করা হলো
+    await start_web_server()
 
     while True:
         await asyncio.sleep(3600)
